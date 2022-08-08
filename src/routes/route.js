@@ -1,38 +1,48 @@
 const express = require('express');
+const lodash = require('lodash')
 const abc = require('../introduction/intro')
 const router = express.Router();
 
 router.get('/test-me', function (req, res) {
     console.log('My batch is', abc.name)
     abc.printName()
-    logger.welcome()
-
     res.send('My second ever api!')
+
+    let month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    console.log(lodash.chunk(month, 4))
+
+    let oddNum = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19.]
+    
+    console.log(_.tail(oddNum))
+
+
+    let gfg = _.union([10000, 22, 3],
+        [3, 840, 10000],
+        [840, 22, 7],
+        [8, 99999, 10000],
+        [11, 12, 13]);
+
+    console.log(gfg)
+
+    let obj1 =[
+        ["horror","The Shining"],
+        ["drama","Titanic"],
+        ["thriller","Shutter Island"],
+        ["fantasy","Pans Labyrinth"]
+       ]
+
+    let obj2 =_.fromPairs(obj1);
+    console.log(obj2)
+
 });
 
-router.get('/students', function (req, res){
-    let students = ['Sabiha', 'Neha', 'Akash']
-    res.send(students)
+
+router.get('/test-you', function (req, res) {
+    res.send('This is the second routes implementation')
 })
 
-router.get('/student-details/:name', function(req, res){
-    /*
-    params is an attribute inside request that contains 
-    dynamic values.
-    This value comes from the request url in the form of an 
-    object where key is the variable defined in code 
-    and value is what is sent in the request
-    */
+router.get('/give-me-students-data', function (req, res) {
 
-    let requestParams = req.params
-
-    // JSON strigify function helps to print an entire object
-    // We can use any ways to print an object in Javascript, JSON stringify is one of them
-    console.log("This is the request "+ JSON.stringify(requestParams))
-    let studentName = requestParams.name
-    console.log('Name of the student is ', studentName)
-    
-    res.send('Dummy response')
 })
-
 module.exports = router;
+// adding this comment for no reason
