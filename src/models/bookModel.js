@@ -1,27 +1,53 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const bookSchema = new mongoose.Schema( {
-    bookName: String, 
-    authorName: String, 
-    tags: [String],
-    
-    isPublished: Boolean,
-    prices: {
-        indianPrice: String,
-        europePrice: String,
+const ObjectId = mongoose.Schema.Types.ObjectId
+
+const bookSchema = new mongoose.Schema({
+    name: String,
+
+    author: {
+        type: ObjectId,
+        ref: "newAuthor"
     },
-    sales: {type: Number, default: 10},
-    
-    // " best boook on earth"   [ "Nodejs in detail" , "mongodb in detail", "fronend in detail"] 
-    // {
-        // "ch1 ": "awesome intro to JS",
-        // "ch2" : "intro to nodejs",
-        // "ch3" : "intro to db"
-    //  }
-    summary :  mongoose.Schema.Types.Mixed,
-    isDeleted: Boolean //true on book deletion i.e you flag the document/data as isDeleted: true..(mark "dirty")
 
-}, { timestamps: true });
+    price: Number,
+    ratings: Number,
+
+    publisher: {
+        type: ObjectId,
+        ref: "newPublisher"
+    },
+
+    isHardCover: {
+        type: Boolean,
+        default: false
+    }
+
+})
+
+module.exports = mongoose.model('newBook', bookSchema)
 
 
-module.exports = mongoose.model('Book', bookSchema) //users
+
+
+
+
+
+
+// const mongoose = require('mongoose');
+// const ObjectId = mongoose.Schema.Types.ObjectId
+
+// const bookSchema = new mongoose.Schema( {
+//     name: String,
+//     author_id: {
+//         type: ObjectId,
+//         ref: "Author"
+//     },
+//     price: Number,
+//     ratings: Number
+
+
+// }, { timestamps: true });
+
+
+// module.exports = mongoose.model('LibraryBook', bookSchema)
